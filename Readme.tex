@@ -1,0 +1,50 @@
+\documentclass{article} % Type of document
+%-----------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{verbatim}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{xcolor}
+%-----------------------------------------------------------
+\newcommand\cad{c'est-à-dire }
+\newcommand{\bt}[1]{\textbf{#1}}
+\definecolor{light-gray}{gray}{0.85}
+\newcommand{\code}[1]{\colorbox{light-gray}{\texttt{#1}}}
+%-----------------------------------------------------------
+\title{Projet d'automatisation de la configuration d'une simulation JADIM}
+\author{}
+\date{}
+%-----------------------------------------------------------
+\begin{document}
+\maketitle
+
+\section{But du projet}
+Automatiser la configuration des fichiers nécessaires au lancement d'une simulation sous JADIM.
+
+\section{Problématique}
+Une simulation JADIM se repose sur un ensemble de fichiers de configuration dont le nom commence par le nom du \code{case}, suivi d'un point et du nom du fichier explicitant son but. Exemple : on s'intéresse à une simulation d'écoulement de Poiseuille, on nomme donc le cas \code{pois} => tous les fichiers de config commenceront donc par \code{pois.}. Le fichier contenant les informations pour l'initialisation se nommera ainsi \code{pois.init}. Chaque fichier correspond ainsi à des éléments différents nécessaires pour la simulation (initialisation, géométrie, physique, paramètres numériques de la simulation, etc.), et chacun doit être édité à la main. Le problème est qu'il est parfois fastidieux de chercher dans l'ensemble des fichiers où une variable en particulier est affectée, et pire certaines variables sont affectées à plus d'un endroit à la fois (exemple les densité et viscosité dynamique de la phase 1 en multiphasique sont affectées dans le \code{rovar} et le \code{phys}).
+
+L'idée de ce projet est d'utiliser un script (python, bash, etc.) dans lequel toutes les informations nécessaires à l'exécution d'une simulation seront stockées, puis il suffira d'exécuter ce script afin de générer automatiquement tous les fichiers nécessaires. Ainsi toutes ces informations seront concentrées au même endroit, ce qui sera plus simple pour chercher et modifier un paramètre, et ce script pourra être exporté aisément d'une simulation à une autre.
+
+\section{Liste des fichiers de configuration}
+L'ensemble des fichiers nécessaires doit être renseigné dans un fichier "jcl". Une simulation diphasique nécessite les fichiers suivants : \code{geom}, \code{limi}, \code{bord}, \code{para}, \code{phys}, \code{init}, \code{rovar} et \code{reli}.
+
+\begin{itemize}
+    \item   \code{geom} : informations sur la géométrie, contient les coordonnées des points du maillage
+    \item   \code{limi} : informations sur les conditions limites de la boite de simulation
+    \item   \code{bord} : coordonnées des points du maillage sur les frontières
+    \item   \code{para} : paramètres numériques de la simulation (nombre d'itérations max, reprise de calcul, pas de temps min et max, activation de certains modules comme la LES, etc.)
+    \item   \code{phys} : quelques paramètres physiques (densité, viscosité dynamique et diffusivité thermique de la phase 1, coordonnées du gradient de pression et composantes de la gravité)
+    \item   \code{init} : conditions initiales, notamment le champ de vitesse initial, et l'espace occupé par la phase 2 à t=0 pour un écoulement diphasique
+    \item   \code{rovar} : propriétés physiques des 2ou 3 phases pour un écoulement multiphysique, ainsi que quelques paramètres de simulation comme le nombre de lissages de la tension de surface pour le calcul de la force capillaire
+    \item   \code{reli} : fichier binaire nécessaire quand on fait une reprise de calcul avec ijob=1 dans le ficheir \code{para} (ne sert à rien si ijob=0 mais nécessaire sinon le code fait planter la simulation dès la 1ère itération)
+\end{itemize}
+
+Les fichiers \code{geom}, \code{limi} et \code{bord} sont générés automatiquement par l'outil de génération de maillage fourni avec JADIM, il ne sera donc pas possible de les générer/actualiser avec ce projet. A moins éventuellement d'appeler le mailleur et de l'exécuter, mais cela pourrait s'avérer fastidieux.
+
+\end{document}
