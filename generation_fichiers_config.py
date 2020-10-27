@@ -9,29 +9,34 @@ import os
 #==================================================================================================
 def init():
     init_dict = {
-            "cu0": 0., #
-            "cux": 0., #
-            "cuy": 0., #
-            "cv0": 0., #
-            "cvx": 0., #
-            "cvy": 0., #
-            "omega": 0., #
-            "tini": 0., #
-            "ishear": 0, #
-            "iswirl": 0, #
-            "icomb": 0, #
+            # vitesse initiale selon x : u = cu0 + cux * x + cuy + y
+            # vitesse initiale selon y : v = cv0 + cvx * x + cvy + y
+            # vitesse initiale selon z : w = omega
+            # div(u) = cux + cvy = 0
+            "cu0": 0.,
+            "cux": 0.,
+            "cuy": 0.,
+            "cv0": 0.,
+            "cvx": 0.,
+            "cvy": 0.,
+            "omega": 0.,
+            "tini": 0., # temperature intiale
+            "ishear": 0, # type d adimensionalisation des coefficient de trainee et portance
+            "iswirl": 0, # creation d'un tourbillon si =1
+            "icomb": 0, # type d initialisation pour densite variable (=0 pour ro constant)
             "nnwave": 1, #
-            "nwave": 10, #
+            "nwave": 10, # initialise le taux de presence (1 selon le numero de cellule (i,j,k), 10 selon les coordonnees (x,y,z))
             "nwaveout": 0, #
-            "nblock": 1, #
-            "xdeb": 0.0, #
-            "xfin": 200e-3, #
-            "ydeb": 0.0, #
-            "yfin": 25e-3, #
-            "zdeb": 0.0, #
-            "zfin": 1.0, #
-            "tauini2": 1.0, #
-            "tauini3": 0.0, #
+            "nblock": 1, # nombre de carres ou cubes a initialiser (mettre 1 pour initialiser le 2nd fluide si diphasique)
+            # si nwave = 10 et nblock = 1 : initialise le taux de presence de la 2nde phase dans un bloc delimite par les coordonnees xdeb<x<xfin, ydeb<y<yfin, zdeb<z<zfin
+            "xdeb": 0.0,
+            "xfin": 200e-3,
+            "ydeb": 0.0,
+            "yfin": 25e-3,
+            "zdeb": 0.0,
+            "zfin": 1.0,
+            "tauini2": 1.0, # valeur du taux de presence de la 2nde phase dans le bloc defini ci-dessus
+            "tauini3": 0.0, # valeur du taux de presence de la 2nde phase dans le bloc defini ci-dessus
         }
     return init_dict
 
