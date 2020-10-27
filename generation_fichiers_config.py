@@ -91,15 +91,15 @@ def para():
 #==================================================================================================
 def phys():
     phys_dict = {
-            "ro1": 1., #
-            "xmu1": 1.5e-5, #
-            "xmut1": 0., #
-            "dpdx": -1.0025E+01, #
-            "dpdy": 0., #
-            "dpdz": 0., #
-            "grx": -2.5075E-02, #
-            "gry": -9.81, #
-            "grz": 0., #
+            "ro1": 1., # density for phase 1
+            "xmu1": 1.5e-5, # dynamic viscosity for phase 1
+            "xmut1": 0., # thermic diffusivity for phase 1
+            "dpdx": -1.0025E+01, # x component of pressure gradient
+            "dpdy": 0., # y component of pressure gradient
+            "dpdz": 0., # z component of pressure gradient
+            "grx": -2.5075E-02, # x component of gravity
+            "gry": -9.81, # y component of gravity
+            "grz": 0., # z component of gravity
             }
     return phys_dict
 
