@@ -79,7 +79,7 @@ def para():
             "icoupl": 0,
             "igaz": 0,
             "idatr": 0,
-            "imb": 0,
+            "ibm": 0,
             "ichim": 0,
             "irchim": 0,
             "irheo": 0,
@@ -175,7 +175,42 @@ def para_strings():
 
     mystrings = list()
 
-    mystrings.append( assemble_string( {k:para_dict[k] for k in ('') if k in para_dict} ) )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('i3d', 'ixaxsy', 'icur') if k in para_dict} ) )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('ijob', '') if k in para_dict} ) )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('maxit', '') if k in para_dict} ) )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('npi', 'ilist', 'ibin', 'ivort', 'itec', 'idat') if k in para_dict} ) )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('reli', 'ebin') if k in para_dict} ) )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('isolverp', 'epsip') if k in para_dict} ) )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('dtmin', 'dtmax', 'div') if k in para_dict} ) )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('imp', '') if k in para_dict} ) )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('iparacalc', '') if k in para_dict} ) )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('ista', 'alf') if k in para_dict} ) )
+    mystrings.append( separation )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('iles', 'imod', 'cconst', 'constt') if k in para_dict} ) )
+    mystrings.append( separation )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('it', 'irt') if k in para_dict} ) )
+    mystrings.append( separation )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('irovar', '') if k in para_dict} ) )
+    mystrings.append( separation )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('istat', 'ijobstat', 'npsdeb') if k in para_dict} ) )
+    mystrings.append( separation )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('itraj', 'irtraj') if k in para_dict} ) )
+    mystrings.append( separation )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('ipertur', 'nptper', 'nptperdeb', 'typeper') if k in para_dict} ) )
+    mystrings.append( separation )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('icoupl', 'igaz') if k in para_dict} ) )
+    mystrings.append( separation )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('idatr', '') if k in para_dict} ) )
+    mystrings.append( separation )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('ibm', '') if k in para_dict} ) )
+    mystrings.append( separation )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('ichim', 'irchim') if k in para_dict} ) )
+    mystrings.append( separation )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('irheo', 'idem') if k in para_dict} ) )
+    mystrings.append( separation )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('idem', '') if k in para_dict} ) )
+    mystrings.append( separation )
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('ifcm', '') if k in para_dict} ) )
 
     return mystrings
 
@@ -202,14 +237,21 @@ def rovar_strings():
     mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('ro1', 'xmu1', 'xmut1') if k in rovar_dict} ) )
     mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('ro2', 'xmu2', 'xmut2') if k in rovar_dict} ) )
     mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('ro3', 'xmu3', 'xmut3') if k in rovar_dict} ) )
+    mystrings.append( separation )
     mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('idm', 'dm', 'ifick') if k in rovar_dict} ) )
+    mystrings.append( separation )
     mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('idttensu', '') if k in rovar_dict} ) )
     mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('tensu12', 'tensu13', 'tensu23') if k in rovar_dict} ) )
     mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('icoflis2', 'icoflis3') if k in rovar_dict} ) )
+    mystrings.append( separation )
     mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('iwet', 'ihyst', 'iwdyn', 'iglis') if k in rovar_dict} ) )
+    mystrings.append( separation )
     mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('imuhar', 'icoflis1') if k in rovar_dict} ) )
+    mystrings.append( separation )
     mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('i_verif_masse', 'tcritere', 'masse_init') if k in rovar_dict} ) )
+    mystrings.append( separation )
     mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('i_modif_vitesse', '') if k in rovar_dict} ) )
+    mystrings.append( separation )
     mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('isurf', 'C_surf0', 'C_surfmax', 'i_mcorr') if k in rovar_dict} ) )
     mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('i_Diff', 'D_Coeff') if k in rovar_dict} ) )
     mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('i_source', 'K_a', 'K_d') if k in rovar_dict} ) )
@@ -230,7 +272,7 @@ def assemble_string( mydico ):
         else:
             mystring += f"{value}" + sp*3
     # write parameters names as comments
-    mystring = '{:100}'.format(mystring) # add as many white spaces so the length of the string is 100
+    mystring = '{:70}'.format(mystring) # add as many white spaces so the length of the string is 70
     mystring += '#' + sp*2
     for item in mydico:
         mystring += f"{item}" + ',' + sp
@@ -260,8 +302,10 @@ def write_to_file( config ):
 #==================================================================================================
 
 dirname = "fichiers_config/"
-case_name = "pois"
+case_name = "surf"
 
+# artificial separation that is mandatory at some places in some config files (why? dunno)
+separation = "---------------------------------------------------------------------\n"
 list_of_config_files = ['init', 'para', 'phys', 'rovar']
 func_options = {
         'init': init_strings,
@@ -271,5 +315,6 @@ func_options = {
         }
 
 write_to_file( "init" )
+write_to_file( "para" )
 write_to_file( "phys" )
 write_to_file( "rovar" )
