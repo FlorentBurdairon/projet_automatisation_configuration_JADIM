@@ -106,36 +106,36 @@ def phys():
 #==================================================================================================
 def rovar():
     rovar_dict = {
-            "nphase": 2, #
-            "iro": 2, #
-            "ro1": 1., #
-            "xmu1": 1.5e-5, #
-            "xmut1": 0., #
-            "ro2": 1.0e+3, #
-            "xmu2": 1.0e-3, #
-            "xmut2": 0., #
-            "ro3": 0., #
-            "xmu3": 0., #
-            "xmut3": 0., #
-            "idm": 0, #
-            "dm": 0., #
+            "nphase": 2, # number of phases
+            "iro": 2, # 1 for 2nd order centered scheme, 2 for FCT, 3 for WENO5 (if nbphase = 2 -> iro =2)
+            "ro1": 1., # density for phase 1
+            "xmu1": 1.5e-5, # dynamic viscosity for phase 1
+            "xmut1": 0., # thermic diffusivity for phase 1
+            "ro2": 1.0e+3, # density for phase 2
+            "xmu2": 1.0e-3, # dynamic viscosity for phase 2
+            "xmut2": 0., # thermic diffusivity for phase 2
+            "ro3": 0., # density for phase 3
+            "xmu3": 0., # dynamic viscosity for phase 3
+            "xmut3": 0., # thermic diffusivity for phase 3
+            "idm": 0, # switch for molecular diffusivity
+            "dm": 0., # molecular diffusivity value
             "ifick": 0, #
-            "idttensu": 1, #
-            "tensu12": 72.8e-3, #
-            "tensu13": 0., #
-            "tensu23": 0., #
-            "icoflis2": 6, #
-            "icoflis3": 6, #
+            "idttensu": 1, # switch for surface tension
+            "tensu12": 72.8e-3, # surface tension between phase 1 and 2
+            "tensu13": 0., # surface tension between phase 1 and 3
+            "tensu23": 0., # surface tension between phase 2 and 3
+            "icoflis2": 6, # smoothing coefficient for suface tension computation
+            "icoflis3": 6, # smoothing coefficient for suface tension computation
             "iwet": 0, #
-            "ihyst": 0, #
-            "iwdyn": 0, #
+            "ihyst": 0, # switch for hysteresis
+            "iwdyn": 0, # switch for dynamical contact angle
             "iglis": 0, #
-            "imuhar": 1, #
-            "icoflis1": 0, #
-            "i_verif_masse": 1, #
-            "tcritere": 1e-3, #
-            "masse_init": 0., #
-            "i_modif_vitesse": 0, #
+            "imuhar": 1, # switch for harmonic computation of viscosity
+            "icoflis1": 0, # smoothing coefficient (for what?)
+            "i_verif_masse": 1, # switch for mass conservation checking
+            "tcritere": 1e-3, # relative precision of the mass conservation
+            "masse_init": 0., # "initial mass" of one of the fluids (printed at the 1st time step on the screen, only used for restart of run)
+            "i_modif_vitesse": 0, # switch to keep a stiff front between 2 phases
             "isurf": 0, #
             "C_surf0": 1, #
             "C_surfmax": 1, #
