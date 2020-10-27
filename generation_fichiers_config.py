@@ -36,6 +36,59 @@ def init():
     return init_dict
 
 #==================================================================================================
+def para():
+    para_dict = {
+            "i3d": 0,
+            "ixaxsy": 0,
+            "icur": 0,
+            "ijob": 0,
+            "maxit": 1,
+            "npi": 1,
+            "ilist": 0,
+            "ibin": 1,
+            "ivort": 0,
+            "itec": 0,
+            "idat": 0,
+            "reli": 'seq',
+            "ebin": 'seq',
+            "isolverp": 3,
+            "epsip": 1.0e-8,
+            "dtmin": 0.1e-7,
+            "dtmax": 1.,
+            "div": 1.5,
+            "imp": 1,
+            "iparacalc": 0,
+            "ista": 6,
+            "alf": 0.,
+            "iles": 0,
+            "imod": 5,
+            "cconst": 0.,
+            "constt": 0.,
+            "it": 0,
+            "irt": 0,
+            "irovar": 1,
+            "istat": 0,
+            "ijobstat": 0,
+            "npsdeb": 0,
+            "itraj": 0,
+            "irtraj": 0,
+            "ipertur": 0,
+            "nptper": 0,
+            "nptperdeb": 0,
+            "typeper": 0,
+            "icoupl": 0,
+            "igaz": 0,
+            "idatr": 0,
+            "imb": 0,
+            "ichim": 0,
+            "irchim": 0,
+            "irheo": 0,
+            "idem": 0,
+            "ifcm": 0,
+            }
+    return para_dict
+
+#==================================================================================================
 def phys():
     phys_dict = {
             "ro1": 1.,
@@ -49,6 +102,53 @@ def phys():
             "grz": 0.,
             }
     return phys_dict
+
+#==================================================================================================
+def rovar():
+    rovar_dict = {
+            "nphase": 2,
+            "iro": 2,
+            "ro1": 1.,
+            "xmu1": 1.5e-5,
+            "xmut1": 0.,
+            "ro2": 1.0e+3,
+            "xmu2": 1.0e-3,
+            "xmut2": 0.,
+            "ro3": 0.,
+            "xmu3": 0.,
+            "xmut3": 0.,
+            "idm": 0,
+            "dm": 0.,
+            "ifick": 0,
+            "idttensu": 1,
+            "tensu12": 72.8e-3,
+            "tensu13": 0.,
+            "tensu23": 0.,
+            "icoflis2": 6,
+            "icoflis3": 6,
+            "iwet": 0,
+            "ihyst": 0,
+            "iwdyn": 0,
+            "iglis": 0,
+            "imuhar": 1,
+            "icoflis1": 0,
+            "i_verf_masse": 1,
+            "tcritere": 1e-3,
+            "masse_init": 0.,
+            "i_modif_vitesse": 0,
+            "isurf": 0,
+            "C_surf0": 1,
+            "C_surfmax": 1,
+            "i_mcorr": 0,
+            "i_Diff": 0,
+            "D_Coeff": 0,
+            "i_source": 0,
+            "K_a": 0,
+            "K_d": 0,
+            "i_sigvar": 0,
+            "i_sigma_init": 1,
+            }
+    return rovar_dict
 
 #==================================================================================================
 # ASSEMBLE STRINGS
