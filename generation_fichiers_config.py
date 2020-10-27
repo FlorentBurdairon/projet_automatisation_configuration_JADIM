@@ -9,144 +9,144 @@ import os
 #==================================================================================================
 def init():
     init_dict = {
-            "cu0": 0.,
-            "cux": 0.,
-            "cuy": 0.,
-            "cv0": 0.,
-            "cvx": 0.,
-            "cvy": 0.,
-            "omega": 0.,
-            "tini": 0.,
-            "ishear": 0,
-            "iswirl": 0,
-            "icomb": 0,
-            "nnwave": 1,
-            "nwave": 10,
-            "nwaveout": 0,
-            "nblock": 1,
-            "xdeb": 0.0,
-            "xfin": 200e-3,
-            "ydeb": 0.0,
-            "yfin": 25e-3,
-            "zdeb": 0.0,
-            "zfin": 1.0,
-            "tauini2": 1.0,
-            "tauini3": 0.0,
+            "cu0": 0., #
+            "cux": 0., #
+            "cuy": 0., #
+            "cv0": 0., #
+            "cvx": 0., #
+            "cvy": 0., #
+            "omega": 0., #
+            "tini": 0., #
+            "ishear": 0, #
+            "iswirl": 0, #
+            "icomb": 0, #
+            "nnwave": 1, #
+            "nwave": 10, #
+            "nwaveout": 0, #
+            "nblock": 1, #
+            "xdeb": 0.0, #
+            "xfin": 200e-3, #
+            "ydeb": 0.0, #
+            "yfin": 25e-3, #
+            "zdeb": 0.0, #
+            "zfin": 1.0, #
+            "tauini2": 1.0, #
+            "tauini3": 0.0, #
         }
     return init_dict
 
 #==================================================================================================
 def para():
     para_dict = {
-            "i3d": 0,
-            "ixaxsy": 0,
-            "icur": 0,
-            "ijob": 0,
-            "maxit": 1,
-            "npi": 1,
-            "ilist": 0,
-            "ibin": 1,
-            "ivort": 0,
-            "itec": 0,
-            "idat": 0,
-            "reli": 'seq',
-            "ebin": 'seq',
-            "isolverp": 3,
-            "epsip": 1.0e-8,
-            "dtmin": 0.1e-7,
-            "dtmax": 1.,
-            "div": 1.5,
-            "imp": 1,
-            "iparacalc": 0,
-            "ista": 6,
-            "alf": 0.,
-            "iles": 0,
-            "imod": 5,
-            "cconst": 0.,
-            "constt": 0.,
-            "it": 0,
-            "irt": 0,
-            "irovar": 1,
-            "istat": 0,
-            "ijobstat": 0,
-            "npsdeb": 0,
-            "itraj": 0,
-            "irtraj": 0,
-            "ipertur": 0,
-            "nptper": 0,
-            "nptperdeb": 0,
-            "typeper": 0,
-            "icoupl": 0,
-            "igaz": 0,
-            "idatr": 0,
-            "ibm": 0,
-            "ichim": 0,
-            "irchim": 0,
-            "irheo": 0,
-            "idem": 0,
-            "ifcm": 0,
+            "i3d": 0, # 1 if 3D
+            "ixaxsy": 0, # 1 if axisymmetric
+            "icur": 0, # 1 if curvilinear
+            "ijob": 0, # 1 if computation restart, 2 to restart without Navier-Stokes
+            "maxit": 1, # maximum number of iterations
+            "npi": 1, # screen print (mass loss && npt,dt,du,dv,dw,dtau)
+            "ilist": 0, # velocity field in ruvp (ascii format)
+            "ibin": 1, # jadim binary in rbin (u,v,w,p,tempe,tau2)
+            "ivort": 0, # vorticity field in rbinv binary file
+            "itec": 0, # tecplot binary
+            "idat": 0, # user variable for output
+            "reli": 'seq', # seq, spl, mpi
+            "ebin": 'seq', # seq, spl, mpi
+            "isolverp": 3, # pressure solver choice - Fourier 1, itpack 2, PetsC 3
+            "epsip": 1.0e-8, # stop criterium for iterative solver (2 or 3)
+            "dtmin": 0.1e-7, # minimal time step
+            "dtmax": 1., # maximal time step (imposed if dtCFL>dtmax)
+            "div": 1.5, # security for CFL time step computed in the code : dt=dtCFL/div
+            "imp": 1, # diffusivity treatment : 0 if explicit, 1 if implicit
+            "iparacalc": 0, #
+            "ista": 6, # flow type
+            "alf": 0., # caracteristic value for flow (cf. front,forcage and traine.f90)
+            "iles": 0, # Large Eddy Simulation if 1
+            "imod": 5, # used LES model (1,2,3,4)
+            "cconst": 0., # turbulent viscosity constant (if imod = 1 or 4)
+            "constt": 0., # turbulent diffusivity constant (if imod = 1 or 4)
+            "it": 0, # thermics calculus if si 1
+            "irt": 0, # restart thermics
+            "irovar": 1, # variable density (mono or polyphasic) if 1 (add a *.rovar input file)
+            "istat": 0, # compute statistics if 1
+            "ijobstat": 0, #  1 if stat on particles restart
+            "npsdeb": 0, # statistics start time step
+            "itraj": 0, # lagrangian particles tracking if 1 (add a *.traj input file)
+            "irtraj": 0, # 1 if lagrangian particles tracking restart
+            "ipertur": 0, # flow disturbance if > 0 (cf. 1:perturb/2:forcage)
+            "nptper": 0, # number of disturbed iterations
+            "nptperdeb": 0, # initial disturbed time step
+            "typeper": 0, #
+            "icoupl": 0, # 2-domains coupling
+            "igaz": 0, # 0 for the fluid domain, 1 for the gaz domain
+            "idatr": 0, # 1 to compute drag force (add *.datr input file)
+            "ibm": 0, # 1 to add an immersed obstacle (add *.ibm input file)
+            "ichim": 0, # 1 to compute reaction (add *.chim input file)
+            "irchim": 0, # 1 to restart a chemistry computation
+            "irheo": 0, # 1 to compute a non newtonian rheology (add *.rheo input file)
+            "idem": 0, #
+            "ifcm": 0, #
             }
     return para_dict
 
 #==================================================================================================
 def phys():
     phys_dict = {
-            "ro1": 1.,
-            "xmu1": 1.5e-5,
-            "xmut1": 0.,
-            "dpdx": -1.0025E+01,
-            "dpdy": 0.,
-            "dpdz": 0.,
-            "grx": -2.5075E-02,
-            "gry": -9.81,
-            "grz": 0.,
+            "ro1": 1., #
+            "xmu1": 1.5e-5, #
+            "xmut1": 0., #
+            "dpdx": -1.0025E+01, #
+            "dpdy": 0., #
+            "dpdz": 0., #
+            "grx": -2.5075E-02, #
+            "gry": -9.81, #
+            "grz": 0., #
             }
     return phys_dict
 
 #==================================================================================================
 def rovar():
     rovar_dict = {
-            "nphase": 2,
-            "iro": 2,
-            "ro1": 1.,
-            "xmu1": 1.5e-5,
-            "xmut1": 0.,
-            "ro2": 1.0e+3,
-            "xmu2": 1.0e-3,
-            "xmut2": 0.,
-            "ro3": 0.,
-            "xmu3": 0.,
-            "xmut3": 0.,
-            "idm": 0,
-            "dm": 0.,
-            "ifick": 0,
-            "idttensu": 1,
-            "tensu12": 72.8e-3,
-            "tensu13": 0.,
-            "tensu23": 0.,
-            "icoflis2": 6,
-            "icoflis3": 6,
-            "iwet": 0,
-            "ihyst": 0,
-            "iwdyn": 0,
-            "iglis": 0,
-            "imuhar": 1,
-            "icoflis1": 0,
-            "i_verif_masse": 1,
-            "tcritere": 1e-3,
-            "masse_init": 0.,
-            "i_modif_vitesse": 0,
-            "isurf": 0,
-            "C_surf0": 1,
-            "C_surfmax": 1,
-            "i_mcorr": 0,
-            "i_Diff": 0,
-            "D_Coeff": 0,
-            "i_source": 0,
-            "K_a": 0,
-            "K_d": 0,
-            "i_sigvar": 0,
-            "i_sigma_init": 1,
+            "nphase": 2, #
+            "iro": 2, #
+            "ro1": 1., #
+            "xmu1": 1.5e-5, #
+            "xmut1": 0., #
+            "ro2": 1.0e+3, #
+            "xmu2": 1.0e-3, #
+            "xmut2": 0., #
+            "ro3": 0., #
+            "xmu3": 0., #
+            "xmut3": 0., #
+            "idm": 0, #
+            "dm": 0., #
+            "ifick": 0, #
+            "idttensu": 1, #
+            "tensu12": 72.8e-3, #
+            "tensu13": 0., #
+            "tensu23": 0., #
+            "icoflis2": 6, #
+            "icoflis3": 6, #
+            "iwet": 0, #
+            "ihyst": 0, #
+            "iwdyn": 0, #
+            "iglis": 0, #
+            "imuhar": 1, #
+            "icoflis1": 0, #
+            "i_verif_masse": 1, #
+            "tcritere": 1e-3, #
+            "masse_init": 0., #
+            "i_modif_vitesse": 0, #
+            "isurf": 0, #
+            "C_surf0": 1, #
+            "C_surfmax": 1, #
+            "i_mcorr": 0, #
+            "i_Diff": 0, #
+            "D_Coeff": 0, #
+            "i_source": 0, #
+            "K_a": 0, #
+            "K_d": 0, #
+            "i_sigvar": 0, #
+            "i_sigma_init": 1, #
             }
     return rovar_dict
 
