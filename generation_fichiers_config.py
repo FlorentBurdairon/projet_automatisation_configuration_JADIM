@@ -132,7 +132,7 @@ def rovar():
             "iglis": 0,
             "imuhar": 1,
             "icoflis1": 0,
-            "i_verf_masse": 1,
+            "i_verif_masse": 1,
             "tcritere": 1e-3,
             "masse_init": 0.,
             "i_modif_vitesse": 0,
@@ -153,58 +153,107 @@ def rovar():
 #==================================================================================================
 # ASSEMBLE STRINGS
 #==================================================================================================
-def write_init_file():
+def init_strings():
     init_dict = init()
 
-    myfilename = ".init"
-    myfile = open( dirname + case_name + myfilename, "w")
+    mystrings = list()
 
-    myfile.write( assemble_string( {k:init_dict[k] for k in ('cu0', 'cux', 'cuy', 'cv0', 'cvx', 'cvy', 'omega') if k in init_dict} ) )
-    myfile.write( assemble_string( {k:init_dict[k] for k in ('tini', '') if k in init_dict} ) )
-    myfile.write( assemble_string( {k:init_dict[k] for k in ('ishear', '') if k in init_dict} ) )
-    myfile.write( assemble_string( {k:init_dict[k] for k in ('iswirl', '') if k in init_dict} ) )
-    myfile.write( assemble_string( {k:init_dict[k] for k in ('icomb', 'nnwave') if k in init_dict} ) )
-    myfile.write( assemble_string( {k:init_dict[k] for k in ('nwave', 'nwaveout') if k in init_dict} ) )
-    myfile.write( assemble_string( {k:init_dict[k] for k in ('nblock', '') if k in init_dict} ) )
-    myfile.write( assemble_string( {k:init_dict[k] for k in ('xdeb', 'xfin', 'ydeb', 'yfin', 'zdeb', 'zfin', 'tauini2', 'tauini3') if k in init_dict} ) )
+    mystrings.append( assemble_string( {k:init_dict[k] for k in ('cu0', 'cux', 'cuy', 'cv0', 'cvx', 'cvy', 'omega') if k in init_dict} ) )
+    mystrings.append( assemble_string( {k:init_dict[k] for k in ('tini', '') if k in init_dict} ) )
+    mystrings.append( assemble_string( {k:init_dict[k] for k in ('ishear', '') if k in init_dict} ) )
+    mystrings.append( assemble_string( {k:init_dict[k] for k in ('iswirl', '') if k in init_dict} ) )
+    mystrings.append( assemble_string( {k:init_dict[k] for k in ('icomb', 'nnwave') if k in init_dict} ) )
+    mystrings.append( assemble_string( {k:init_dict[k] for k in ('nwave', 'nwaveout') if k in init_dict} ) )
+    mystrings.append( assemble_string( {k:init_dict[k] for k in ('nblock', '') if k in init_dict} ) )
+    mystrings.append( assemble_string( {k:init_dict[k] for k in ('xdeb', 'xfin', 'ydeb', 'yfin', 'zdeb', 'zfin', 'tauini2', 'tauini3') if k in init_dict} ) )
 
-    myfile.close()
-    print(f"File " + colored(f"{myfilename}", "yellow") + " processed")
+    return mystrings
 
 #==================================================================================================
-def write_phys_file():
+def para_strings():
+    para_dict = para()
+
+    mystrings = list()
+
+    mystrings.append( assemble_string( {k:para_dict[k] for k in ('') if k in para_dict} ) )
+
+    return mystrings
+
+#==================================================================================================
+def phys_strings():
     phys_dict = phys()
 
-    myfilename = ".phys"
-    myfile = open( dirname + case_name + myfilename, "w")
+    mystrings = list()
 
-    myfile.write( assemble_string( {k:phys_dict[k] for k in ('ro1', 'xmu1', 'xmut1') if k in phys_dict} ) )
-    myfile.write( assemble_string( {k:phys_dict[k] for k in ('dpdx', 'dpdy', 'dpdz') if k in phys_dict} ) )
-    myfile.write( assemble_string( {k:phys_dict[k] for k in ('grx', 'gry', 'grz') if k in phys_dict} ) )
+    mystrings.append( assemble_string( {k:phys_dict[k] for k in ('ro1', 'xmu1', 'xmut1') if k in phys_dict} ) )
+    mystrings.append( assemble_string( {k:phys_dict[k] for k in ('dpdx', 'dpdy', 'dpdz') if k in phys_dict} ) )
+    mystrings.append( assemble_string( {k:phys_dict[k] for k in ('grx', 'gry', 'grz') if k in phys_dict} ) )
 
-    myfile.close()
-    print(f"File " + colored(f"{myfilename}", "yellow") + " processed")
+    return mystrings
+
+#==================================================================================================
+def rovar_strings():
+    rovar_dict = rovar()
+
+    mystrings = list()
+
+    mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('nphase', '') if k in rovar_dict} ) )
+    mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('iro', '') if k in rovar_dict} ) )
+    mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('ro1', 'xmu1', 'xmut1') if k in rovar_dict} ) )
+    mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('ro2', 'xmu2', 'xmut2') if k in rovar_dict} ) )
+    mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('ro3', 'xmu3', 'xmut3') if k in rovar_dict} ) )
+    mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('idm', 'dm', 'ifick') if k in rovar_dict} ) )
+    mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('idttensu', '') if k in rovar_dict} ) )
+    mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('tensu12', 'tensu13', 'tensu23') if k in rovar_dict} ) )
+    mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('icoflis2', 'icoflis3') if k in rovar_dict} ) )
+    mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('iwet', 'ihyst', 'iwdyn', 'iglis') if k in rovar_dict} ) )
+    mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('imuhar', 'icoflis1') if k in rovar_dict} ) )
+    mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('i_verif_masse', 'tcritere', 'masse_init') if k in rovar_dict} ) )
+    mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('i_modif_vitesse', '') if k in rovar_dict} ) )
+    mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('isurf', 'C_surf0', 'C_surfmax', 'i_mcorr') if k in rovar_dict} ) )
+    mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('i_Diff', 'D_Coeff') if k in rovar_dict} ) )
+    mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('i_source', 'K_a', 'K_d') if k in rovar_dict} ) )
+    mystrings.append( assemble_string( {k:rovar_dict[k] for k in ('i_sigvar', 'i_sigma_init') if k in rovar_dict} ) )
+
+    return mystrings
 
 #==================================================================================================
 def assemble_string( mydico ):
-    mystring = ' '
+    mystring = ' ' # start line with a white space
     sp = ' '
     N = 60
+    # write parameters values
     for item in mydico:
         value = mydico[item]
         if isinstance( value, float ) and value != 0:
             mystring += f"{value:e}" + sp*3
         else:
             mystring += f"{value}" + sp*3
-    mystring = '{:100}'.format(mystring)
-#    if len(mystring) < N:
-#        mystring += sp*(N-len(mystring))
+    # write parameters names as comments
+    mystring = '{:100}'.format(mystring) # add as many white spaces so the length of the string is 100
     mystring += '#' + sp*2
     for item in mydico:
         mystring += f"{item}" + ',' + sp
     mystring += '\n'
-#    print( mystring )
     return mystring
+
+#==================================================================================================
+# WRITE STRINGS TO CONFIG FILES
+#==================================================================================================
+def write_to_file( config ):
+    if not( config in list_of_config_files ):
+        print("[Error] " + colored( config, "red") + " is not an appropriate config file name")
+        return
+    else:
+        filename = dirname + case_name + '.' + config
+        myfile = open( filename, 'w')
+
+        list_of_strings = func_options[config]()
+        for item in list_of_strings:
+            myfile.write( item )
+
+        myfile.close()
+        print(f"File " + colored(f"{config}", "yellow") + " processed")
 
 #==================================================================================================
 # SERIOUS STUFF BEGIN HERE
@@ -213,6 +262,14 @@ def assemble_string( mydico ):
 dirname = "fichiers_config/"
 case_name = "pois"
 
-write_init_file()
-write_phys_file()
+list_of_config_files = ['init', 'para', 'phys', 'rovar']
+func_options = {
+        'init': init_strings,
+        'para': para_strings,
+        'phys': phys_strings,
+        'rovar': rovar_strings,
+        }
 
+write_to_file( "init" )
+write_to_file( "phys" )
+write_to_file( "rovar" )
