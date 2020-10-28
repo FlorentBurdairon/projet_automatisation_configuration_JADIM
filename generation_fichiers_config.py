@@ -179,6 +179,7 @@ def init_strings():
 
 #===================================================================================================
 def para_strings():
+    separation = "---------------------------------------------------------------------\n"
     para_dict = para()
 
     mystrings = list()
@@ -236,6 +237,7 @@ def phys_strings():
 
 #===================================================================================================
 def rovar_strings():
+    separation = "---------------------------------------------------------------------\n"
     rovar_dict = rovar()
 
     mystrings = list()
@@ -290,7 +292,8 @@ def assemble_string( mydico ):
 #===================================================================================================
 # WRITE STRINGS TO CONFIG FILES
 #===================================================================================================
-def write_to_file( config ):
+def write_to_file( config, func_options, dirname, case_name ):
+    list_of_config_files = [k for k in func_options]
     if not( config in list_of_config_files ):
         print("[Error] " + colored( config, "red") + " is not an appropriate config file name")
         return
@@ -318,21 +321,24 @@ def generate_output_directory( mydirname ):
 # SERIOUS STUFF BEGIN HERE
 #===================================================================================================
 
-dirname = "./fichiers_config/"
-generate_output_directory( dirname )
-case_name = "surf"
+def main():
+    dirname = "./fichiers_config/"
+    generate_output_directory( dirname )
+    case_name = "surf"
 
 # artificial separation that is mandatory at some places in some config files (why? dunno)
-separation = "---------------------------------------------------------------------\n"
-list_of_config_files = ['init', 'para', 'phys', 'rovar']
-func_options = {
-        'init': init_strings,
-        'para': para_strings,
-        'phys': phys_strings,
-        'rovar': rovar_strings,
-        }
+    separation = "---------------------------------------------------------------------\n"
+    func_options = {
+            'init': init_strings,
+            'para': para_strings,
+            'phys': phys_strings,
+            'rovar': rovar_strings,
+            }
 
-write_to_file( "init" )
-write_to_file( "para" )
-write_to_file( "phys" )
-write_to_file( "rovar" )
+    write_to_file( "init", func_options, dirname, case_name )
+    write_to_file( "para", func_options, dirname, case_name )
+    write_to_file( "phys", func_options, dirname, case_name )
+    write_to_file( "rovar", func_options, dirname, case_name )
+
+if __name__ == "__main__":
+    main()
