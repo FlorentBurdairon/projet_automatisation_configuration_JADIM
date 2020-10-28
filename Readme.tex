@@ -47,4 +47,23 @@ L'ensemble des fichiers nécessaires doit être renseigné dans un fichier "jcl"
 
 Les fichiers \code{geom}, \code{limi} et \code{bord} sont générés automatiquement par l'outil de génération de maillage fourni avec JADIM, il ne sera donc pas possible de les générer/actualiser avec ce projet. A moins éventuellement d'appeler le mailleur et de l'exécuter, mais cela pourrait s'avérer fastidieux.
 
+
+
+\section{Implémentation}
+
+On utilise le script python \verb+generation_fichiers_config.py+, qui se sert de dictionnaires pour stocker les informations nécessaires. La structure du code est la suivante :
+\begin{itemize}
+    \item   pour chaque fichier, une routine défini un dictionnaire contenant les noms et valeurs des paramètres qui doivent être stockés dans ce fichier. Cette routine porte le nom du fichier correspondant (init, para, etc.).
+    \item   une seconde routine appelle la routine précédente afin de charger le dictionnaire, puis génère une liste de chaînes de caractères, chacune correspondant à une ligne du fichier final qui sera généré. Le nom de cette routine est une concaténation entre le nom du fichier de configuration et '\_strings' (donc 'para\_strings()' pour le fichier para).
+    \item   la génération des chaînes de caractère dans les routine '\_strings' se fait à l'aide de la routine 'assemble\_strings', qui prend en entrée un dictionnaire, et génère en sortie une chaîne de caractères organisée ainsi : on commence par un espace blanc, puis les valeurs des paramètres composant cette ligne sont écrits à la suite (valeurs des items du dictionnaire), séparés par un nombre fixe d'espaces blancs, et enfin la fin de la ligne est composée de la suite des noms des paramètres (clés du dictionnaire) alignés derrière le symbole '\#' (délimitation des commentaires).
+    \item   dans le \textit{main}, on exécute, pour chaque fichier, une routine générale qui va ouvrir le fichier en écriture (créer un nouveau fichier ou le remplace s'il existe déjà), appeler la routine précédente afin de collecter l'ensemble des chaînes de caractères, les écrire dans le fichier précédemment ouvert, puis le fermer lorsque le processus d'écriture est terminé. Cette routine  s'appelle 'write\_to\_file'.
+\end{itemize}
+La routine d'écriture des fichiers est donc générale et commune à tous les fichiers de configuration, l'appel en son sein de la bonne routine de génération des chaînes de caractères se fait à l'aide d'un dictionnaire python qui recense l'ensemble des fichiers de configuration traités en associant le nom générique (init, phys, etc.) au nom de la routine '\_strings'.
+
+\section{A faire}
+
+Ajouter des dépendances entre certaines variables ou d'un fichier à l'autre, notamment pour les paramètres physiques de la phase 1 (densité, viscosité dynamique et diffusivité thermique) qui sont écrits à la fois dans le phys et le rovar.
+
+Possibilité d'ajouter la génération des fichiers bord, geom et limi? Ces fichiers sont générés par l'outil \textit{mesher} (voir dans tools) qui lit un fichier annexe contenant les informations sur le maillage (nombre de noeuds en x,y,z, dimensions du maillage, etc.), calcule les coordonnées des noeuds en conséquence et les enregistre dans ces 3 fichiers. Idée d'implémentation : générer un fichier annexe \textit{fichier\_annexe.mesh} formaté "comme il faut", puis appeler la commande \texttt{mesher.x < fichier\_annexe.mesh}, tout ça depuis le script python, et éventuellement déplacer les 3 fichiers ainsi générés dans le même dossier que les autres.
+
 \end{document}
