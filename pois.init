@@ -1,8 +1,0 @@
- 0.  0.00  0.00  0.00  0.00  0.00  0.00 	# cu0 cux cuy cv0 cvx cvy omega
- 0.00					  	                # tini
- 0  						                # ishear
- 0						                    # iswirl
- 0 1
-10   0                                      # nwave (nwave = 1 : init taux suivant le maillage cad selon le numero de cellule plutot que les distances), nwaveout
-1                                           # nombre de carres ou cubes a initialiser (mettre 1 pour initialiser le 2nd fluide sir diphasique)
-0.    0.200  0. 0.025  0.  1.   1. 0.       # xdeb, xfin, ydeb, yfin, zdeb, zfin, tauini2, tauini3
